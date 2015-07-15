@@ -97,6 +97,15 @@ namespace GameOfLife
             game.AddCell(cell3);
             Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(2));
         }
+
+        [Test]
+        public void LonelyCellShouldDie()
+        {
+            var game = new Game();
+            var cell1 = new Cell(0, 0);
+            game = game.Next();
+            Assert.That(game.CellIsAlive(0, 0), Is.False);
+        }
     }
 
     public class Cell
@@ -145,6 +154,11 @@ namespace GameOfLife
                 }
             }
             return ret;
+        }
+
+        public Game Next()
+        {
+            return new Game();
         }
     }
 }
