@@ -29,12 +29,24 @@ namespace GameOfLife
             game.AddCell(cell);
             Assert.That(game.CellIsAlive(1, 2), Is.True);
         }
+
+        [Test]
+        public void DeadCellIsNotAlive()
+        {
+            var game = new Game();
+            Assert.That(game.CellIsAlive(1, 2), Is.False);
+        }
     }
 
     public class Cell
     {
-        public Cell(int i, int i1)
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Cell(int x, int y)
         {
+            X = x;
+            Y = y;
         }
 
         public bool IsAlive()
@@ -56,7 +68,8 @@ namespace GameOfLife
 
         public bool CellIsAlive(int x, int y)
         {
-            return true;
+            var cell = m_Cells.Find(c => c.X == x && c.Y == y);
+            return cell != null && cell.IsAlive();
         }
     }
 }
