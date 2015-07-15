@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace GameOfLife
 {
@@ -9,6 +10,15 @@ namespace GameOfLife
         {
             var cell = new Cell(0, 0);
             Assert.That(cell.IsAlive(), Is.True);
+        }
+
+        [Test]
+        public void CanAddCellToGame()
+        {
+            var game = new Game();
+            var cell = new Cell(0, 0);
+            game.AddCell(cell);
+            Assert.AreEqual(1, game.CellCount);
         }
     }
 
@@ -26,5 +36,14 @@ namespace GameOfLife
 
     public class Game
     {
+        private List<Cell> m_Cells = new List<Cell>();
+        public int CellCount { get { return m_Cells.Count;  } }
+
+        public void AddCell(Cell cell)
+        {
+            m_Cells.Add(cell);
+        }
+
+       
     }
 }
