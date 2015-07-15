@@ -60,6 +60,30 @@ namespace GameOfLife
             game.AddCell(cell2);
             Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(1));
         }
+
+        [Test]
+        public void CountNeighboursUpAndDownIsCorrect()
+        {
+            var game = new Game();
+            var cell1 = new Cell(0, 0);
+            game.AddCell(cell1);
+            var cell2 = new Cell(0, -1);
+            game.AddCell(cell2);
+            var cell3 = new Cell(0, 1);
+            game.AddCell(cell3);
+            Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CountNeighboursUpAndDownOneIsCorrect()
+        {
+            var game = new Game();
+            var cell1 = new Cell(0, 0);
+            game.AddCell(cell1);
+            var cell2 = new Cell(0, -1);
+            game.AddCell(cell2);
+            Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(1));
+        }
     }
 
     public class Cell
@@ -101,6 +125,8 @@ namespace GameOfLife
             var ret = 0;
             if (CellIsAlive(x - 1, y)) ret++;
             if (CellIsAlive(x + 1, y)) ret++;
+            if (CellIsAlive(x, y - 1)) ret++;
+            if (CellIsAlive(x, y + 1)) ret++;
             return ret;
         }
     }
