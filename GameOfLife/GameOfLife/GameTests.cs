@@ -5,9 +5,22 @@ namespace GameOfLife
     public class GameTests
     {
         [Test]
-        public void CreateNewGame()
+        public void CellIsAliveByDefault()
         {
-            var game = new Game();
+            var cell = new Cell(0, 0);
+            Assert.That(cell.IsAlive(), Is.True);
+        }
+    }
+
+    public class Cell
+    {
+        public Cell(int i, int i1)
+        {
+        }
+
+        public bool IsAlive()
+        {
+            return true;
         }
     }
 
