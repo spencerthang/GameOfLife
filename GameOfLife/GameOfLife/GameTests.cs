@@ -45,9 +45,20 @@ namespace GameOfLife
             game.AddCell(cell1);
             var cell2 = new Cell(1, 0);
             game.AddCell(cell2);
-            var cell3 = new Cell(0, 0);
+            var cell3 = new Cell(-1, 0);
             game.AddCell(cell3);
             Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CountNeighboursLeftAndRightOneIsCorrect()
+        {
+            var game = new Game();
+            var cell1 = new Cell(0, 0);
+            game.AddCell(cell1);
+            var cell2 = new Cell(1, 0);
+            game.AddCell(cell2);
+            Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(1));
         }
     }
 
@@ -85,9 +96,12 @@ namespace GameOfLife
             return cell != null && cell.IsAlive();
         }
 
-        public int CountNeighbours(int i, int i1)
+        public int CountNeighbours(int x, int y)
         {
-            return 2;
+            var ret = 0;
+            if (CellIsAlive(x - 1, y)) ret++;
+            if (CellIsAlive(x + 1, y)) ret++;
+            return ret;
         }
     }
 }
