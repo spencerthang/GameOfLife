@@ -84,6 +84,19 @@ namespace GameOfLife
             game.AddCell(cell2);
             Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(1));
         }
+
+        [Test]
+        public void CountNeighboursDiagonalIsCorrect()
+        {
+            var game = new Game();
+            var cell1 = new Cell(0, 0);
+            game.AddCell(cell1);
+            var cell2 = new Cell(-1, -1);
+            game.AddCell(cell2);
+            var cell3 = new Cell(1, 1);
+            game.AddCell(cell3);
+            Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(2));
+        }
     }
 
     public class Cell
@@ -123,10 +136,14 @@ namespace GameOfLife
         public int CountNeighbours(int x, int y)
         {
             var ret = 0;
-            if (CellIsAlive(x - 1, y)) ret++;
-            if (CellIsAlive(x + 1, y)) ret++;
-            if (CellIsAlive(x, y - 1)) ret++;
-            if (CellIsAlive(x, y + 1)) ret++;
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    if (i == 0 && j == 0) continue;
+                    if(CellIsAlive(x + i, y + j)) ret++;
+                }
+            }
             return ret;
         }
     }
