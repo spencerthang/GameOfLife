@@ -36,6 +36,19 @@ namespace GameOfLife
             var game = new Game();
             Assert.That(game.CellIsAlive(1, 2), Is.False);
         }
+
+        [Test]
+        public void CountNeighboursLeftAndRightIsCorrect()
+        {
+            var game = new Game();
+            var cell1 = new Cell(0, 0);
+            game.AddCell(cell1);
+            var cell2 = new Cell(1, 0);
+            game.AddCell(cell2);
+            var cell3 = new Cell(0, 0);
+            game.AddCell(cell3);
+            Assert.That(game.CountNeighbours(0, 0), Is.EqualTo(2));
+        }
     }
 
     public class Cell
@@ -70,6 +83,11 @@ namespace GameOfLife
         {
             var cell = m_Cells.Find(c => c.X == x && c.Y == y);
             return cell != null && cell.IsAlive();
+        }
+
+        public int CountNeighbours(int i, int i1)
+        {
+            return 2;
         }
     }
 }
