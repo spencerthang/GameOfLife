@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace GameOfLife
@@ -106,6 +107,15 @@ namespace GameOfLife
             game = game.Next();
             Assert.That(game.CellIsAlive(0, 0), Is.False);
         }
+
+        [Test]
+        public void GameCanTakeAListOfCellsAndIsAlive()
+        {
+            var game = new Game(new [] {
+                new Cell(0, 1)
+            });
+            Assert.IsTrue(game.CellIsAlive(0, 1));
+        }
     }
 
     public class Cell
@@ -128,6 +138,16 @@ namespace GameOfLife
     public class Game
     {
         private List<Cell> m_Cells = new List<Cell>();
+
+        public Game(Cell[] cells)
+        {
+            m_Cells = cells.ToList();
+        }
+
+        public Game()
+        {
+        }
+
         public int CellCount { get { return m_Cells.Count;  } }
 
         public void AddCell(Cell cell)
