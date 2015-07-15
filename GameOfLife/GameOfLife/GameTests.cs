@@ -5,9 +5,13 @@ namespace GameOfLife
     public class GameTests
     {
         [Test]
-        public void FirstTest()
+        public void CreateNewGame()
         {
-            
+            var game = new Game();
         }
+    }
+
+    public class Game
+    {
     }
 }
