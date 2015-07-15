@@ -116,6 +116,17 @@ namespace GameOfLife
             });
             Assert.IsTrue(game.CellIsAlive(0, 1));
         }
+
+        [Test]
+        public void CellWithOneNeighbourShouldDie()
+        {
+            var game = new Game(new[] {
+                new Cell(0, 0),
+                new Cell(0, 1)
+            });
+
+            Assert.That(game.ShouldCellLive(0, 0), Is.False);
+        }
     }
 
     public class Cell
@@ -179,6 +190,12 @@ namespace GameOfLife
         public Game Next()
         {
             return new Game();
+        }
+
+        public bool ShouldCellLive(int x, int y)
+        {
+            var neighboursCount = CountNeighbours(x, y);
+            return false;
         }
     }
 }
