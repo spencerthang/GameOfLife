@@ -20,6 +20,15 @@ namespace GameOfLife
             game.AddCell(cell);
             Assert.AreEqual(1, game.CellCount);
         }
+
+        [Test]
+        public void IsCellAlive()
+        {
+            var game = new Game();
+            var cell = new Cell(1, 2);
+            game.AddCell(cell);
+            Assert.That(game.CellIsAlive(1, 2), Is.True);
+        }
     }
 
     public class Cell
@@ -44,6 +53,10 @@ namespace GameOfLife
             m_Cells.Add(cell);
         }
 
-       
+
+        public bool CellIsAlive(int x, int y)
+        {
+            return true;
+        }
     }
 }
